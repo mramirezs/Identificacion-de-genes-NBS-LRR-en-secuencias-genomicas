@@ -1,4 +1,4 @@
-# Flujo de Trabajo con NLGenomeSweeper para la Detección de Genes NLR
+ # Flujo de Trabajo con NLGenomeSweeper para la Detección de Genes NLR
 
 Este repositorio contiene un flujo de trabajo paso a paso para identificar genes tipo NBS-LRR (NLR) en un genoma vegetal utilizando la herramienta NLGenomeSweeper.
 
@@ -17,7 +17,7 @@ Antes de comenzar, asegurémonos de tener instaladas las siguientes herramientas
 - Git (para clonar el repositorio original o este repositorio)
 - Cualquier otra dependencia detallada en el repositorio oficial de NLGenomeSweeper.
 
-En este repositorio proporcionamos un script (`scripts/install_dependencies.sh`) que facilita la instalación (ajustar según tu sistema):
+En este repositorio proporcionamos un script (`scripts/install_dependencies.sh`) que facilita la instalación de las dependencias:
 
 ```bash
 cd scripts/
@@ -31,6 +31,28 @@ El script install_dependencies.sh contiene:
 conda create -y -n NLGenomeSweeper -c bioconda -c conda-forge \
     python=3.6 blast muscle=3.8.1551 samtools bedtools hmmer transdecoder openjdk
 conda activate NLGenomeSweeper
+```
+
+### Instalación de Interproscan with Panther
+
+```bash
+wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.45-80.0/interproscan-5.45-80.0-64-bit.tar.gz
+
+tar -xzf interproscan-5.45-80.0-64-bit.tar.gz
+
+ln -s $(pwd)/interproscan-5.45-80.0/interproscan.sh $(dirname $(which python))/interproscan
+
+wget ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/data/panther-data-14.1.tar.gz
+
+tar -xzf panther-data-14.1.tar.gz -C interproscan-5.45-80.0/data/
+```
+
+# Descargar NLGenomeSweeper e instalar
+
+```bash
+git clone https://github.com/ntoda03/NLGenomeSweeper.git
+ln -s $(pwd)/NLGenomeSweeper/NLGenomeSweeper $(dirname $(which python))/NLGenomeSweeper
+NLGenomeSweeper -h
 ```
 
 ## Iniciar el Flujo de trabajo
